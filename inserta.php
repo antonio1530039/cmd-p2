@@ -1,28 +1,21 @@
 <?php
-	$servername = "localhost";
-	$username = "sistem63_SQL01";
-	$dbname   = "sistem63_Estudiantes";
-	$password = "Chingatumadre123";	
+	
+  include "conexion.php";
 
 	$nombre    = $_POST['nombre'];
-	$apellidop = $_POST['apellidop'];
-	$apellidom = $_POST['apellidom'];
+	$apellidos = $_POST['apellidos'];
+  $sexo = $_POST['sexo'];
+  $id_padre = 1;
+  $id_grupo = 2;
+  $aceptado = 0;
 
-	
-	echo "Registro Recibido"."\n"."Nombre: ".$nombre."\n ApellidoP: ".$apellidop."\n ApellidoM: ".$apellidom."\n";	
+	$correo = $_POST['correo'];
 
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	} 	
-	
 
-	$sql = "INSERT INTO TablaAlumnos (Nombre, ApellidoP, ApellidoM)
-	VALUES ('$nombre', '$apellidop', '$apellidom')";
+	$sql = "INSERT INTO alumno (nombre, apellidos, sexo, id_padre, id_grupo, aceptado, correo)
+	VALUES ('$nombre', '$apellidos', '$sexo', $id_padre, $id_grupo, $aceptado, '$correo')";
 
-	if ($conn->query($sql) === TRUE) {
+	if ($conn->query($sql)) {
 		echo "Registro Insertado de Manera Exitosa"."\n";
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
